@@ -91,6 +91,7 @@
             color: var(--text);
             border-radius: 14px;
             padding: 14px 16px;
+            padding-inline-end: 52px;
             font-size: 16px;
             outline: none;
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -101,43 +102,29 @@
             box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.2);
         }
 
-        .actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: flex-end;
-            margin-top: 8px;
+        .field {
+            position: relative;
         }
 
-        button {
-            border: none;
-            border-radius: 999px;
-            padding: 12px 22px;
-            font-weight: 600;
+        .field-action {
+            position: absolute;
+            top: 44px;
+            inset-inline-end: 12px;
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: linear-gradient(180deg, #2f80ed, #1b5fbe);
+            color: #ffffff;
             cursor: pointer;
-            background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            color: #0f172a;
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
-            box-shadow: 0 12px 24px rgba(34, 211, 238, 0.25);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 18px rgba(30, 106, 214, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+            transition: transform 0.15s ease;
         }
 
-        button.primary {
-            background: linear-gradient(180deg, #2f80ed, #1b5fbe);
-            color: #ffffff;
-            border-radius: 12px;
-            padding: 12px 28px;
-            box-shadow: 0 10px 24px rgba(30, 106, 214, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
-        }
-
-        button.secondary {
-            background: linear-gradient(180deg, #2f80ed, #1b5fbe);
-            color: #ffffff;
-            border-radius: 12px;
-            padding: 12px 28px;
-            box-shadow: 0 10px 24px rgba(30, 106, 214, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
-        }
-
-        button:hover { transform: translateY(-1px); }
+        .field-action:hover { transform: translateY(-1px); }
 
         .chips {
             display: flex;
@@ -170,20 +157,16 @@
 
         <section class="card">
             <div class="grid">
-                <div>
+                <div class="field">
                     <label for="inputText">متن ورودی</label>
                     <textarea id="inputText" placeholder="اینجا بنویسید…"></textarea>
+                    <button id="clearInputBtn" class="field-action" type="button" title="پاک کردن" aria-label="پاک کردن متن ورودی">🗑</button>
                 </div>
-                <div>
+                <div class="field">
                     <label for="outputText">خروجی تبدیل‌شده</label>
                     <textarea id="outputText" readonly></textarea>
+                    <button id="copyOutputBtn" class="field-action" type="button" title="کپی خروجی" aria-label="کپی خروجی">📋</button>
                 </div>
-            </div>
-
-            <div class="actions">
-                <button id="copyBtn" class="secondary" type="button">کپی خروجی</button>
-                <button id="clearBtn" class="secondary" type="button">پاک کردن</button>
-                <button id="convertBtn" class="primary" type="button">تبدیل</button>
             </div>
 
             <div class="chips" style="margin-top: 18px;">
@@ -222,9 +205,8 @@
 
         const inputText = document.getElementById("inputText");
         const outputText = document.getElementById("outputText");
-        const convertBtn = document.getElementById("convertBtn");
-        const clearBtn = document.getElementById("clearBtn");
-        const copyBtn = document.getElementById("copyBtn");
+        const clearInputBtn = document.getElementById("clearInputBtn");
+        const copyOutputBtn = document.getElementById("copyOutputBtn");
 
         function runConversion() {
             const value = inputText.value || "";
@@ -237,20 +219,19 @@
         }
 
         inputText.addEventListener("input", runConversion);
-        convertBtn.addEventListener("click", runConversion);
 
-        clearBtn.addEventListener("click", () => {
+        clearInputBtn.addEventListener("click", () => {
             inputText.value = "";
             outputText.value = "";
             inputText.focus();
         });
 
-        copyBtn.addEventListener("click", async () => {
+        copyOutputBtn.addEventListener("click", async () => {
             if (!outputText.value) return;
             try {
                 await navigator.clipboard.writeText(outputText.value);
-                copyBtn.textContent = "کپی شد!";
-                setTimeout(() => (copyBtn.textContent = "کپی خروجی"), 1200);
+                copyOutputBtn.textContent = "✅";
+                setTimeout(() => (copyOutputBtn.textContent = "📋"), 1200);
             } catch {
                 outputText.select();
                 document.execCommand("copy");
