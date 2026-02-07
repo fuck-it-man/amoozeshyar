@@ -126,6 +126,14 @@
 
         .field-action:hover { transform: translateY(-1px); }
 
+        .field-action svg {
+            display: block;
+        }
+
+        .field-action.done {
+            background: linear-gradient(180deg, #22c55e, #16a34a);
+        }
+
         .chips {
             display: flex;
             flex-wrap: wrap;
@@ -160,12 +168,25 @@
                 <div class="field">
                     <label for="inputText">متن ورودی</label>
                     <textarea id="inputText" placeholder="اینجا بنویسید…"></textarea>
-                    <button id="clearInputBtn" class="field-action" type="button" title="پاک کردن" aria-label="پاک کردن متن ورودی">🗑</button>
+                    <button id="clearInputBtn" class="field-action" type="button" title="پاک کردن" aria-label="پاک کردن متن ورودی">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M8 6V4h8v2"></path>
+                            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                        </svg>
+                    </button>
                 </div>
                 <div class="field">
                     <label for="outputText">خروجی تبدیل‌شده</label>
                     <textarea id="outputText" readonly></textarea>
-                    <button id="copyOutputBtn" class="field-action" type="button" title="کپی خروجی" aria-label="کپی خروجی">📋</button>
+                    <button id="copyOutputBtn" class="field-action" type="button" title="کپی خروجی" aria-label="کپی خروجی">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
 
@@ -230,8 +251,8 @@
             if (!outputText.value) return;
             try {
                 await navigator.clipboard.writeText(outputText.value);
-                copyOutputBtn.textContent = "✅";
-                setTimeout(() => (copyOutputBtn.textContent = "📋"), 1200);
+                copyOutputBtn.classList.add("done");
+                setTimeout(() => copyOutputBtn.classList.remove("done"), 1200);
             } catch {
                 outputText.select();
                 document.execCommand("copy");
