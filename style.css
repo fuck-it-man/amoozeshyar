@@ -1,0 +1,283 @@
+@import url("https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-Variable-font-face.css");
+
+:root {
+    color-scheme: light dark;
+    --bg: #0a0f16;
+    --bg-accent-1: #0e1b2a;
+    --bg-accent-2: #13273a;
+    --card: rgba(14, 20, 30, 0.92);
+    --muted: #9aa6b2;
+    --text: #e6eef5;
+    --accent: #1fbf8f;
+    --accent-2: #eab308;
+    --border: rgba(148, 163, 184, 0.22);
+    --shadow: 0 22px 50px rgba(3, 6, 10, 0.45);
+    --button: #1e6ad6;
+    --button-2: #194fa3;
+    --hint-bg: rgba(16, 42, 63, 0.35);
+    --hint-border: rgba(59, 130, 246, 0.35);
+    --chip-bg: rgba(148, 163, 184, 0.08);
+}
+
+[data-theme="light"] {
+    color-scheme: light;
+    --bg: #f3f6fb;
+    --bg-accent-1: #dbe7f3;
+    --bg-accent-2: #e9f0f8;
+    --card: rgba(255, 255, 255, 0.9);
+    --muted: #0f172a;
+    --text: #0b1220;
+    --accent: #0ea5e9;
+    --accent-2: #f59e0b;
+    --border: rgba(71, 85, 105, 0.18);
+    --shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+    --button: #1d4ed8;
+    --button-2: #1e40af;
+    --hint-bg: #e6edf9;
+    --hint-border: #b8c6e6;
+    --chip-bg: rgba(15, 23, 42, 0.06);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: "Vazirmatn", system-ui, -apple-system, sans-serif;
+    background: radial-gradient(900px 600px at 10% -10%, var(--bg-accent-1), transparent),
+                radial-gradient(900px 600px at 110% 0%, var(--bg-accent-2), transparent),
+                linear-gradient(180deg, var(--bg), var(--bg));
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+}
+
+.container {
+    width: 100%;
+    max-width: 980px;
+    display: grid;
+    gap: 24px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.hero {
+    text-align: center;
+}
+
+.hero-logo {
+    width: clamp(90px, 18vw, 150px);
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 8px;
+}
+
+.hero p {
+    margin: 0;
+    color: var(--muted);
+    font-size: clamp(14px, 1.6vw, 18px);
+}
+
+.card {
+    background: var(--card);
+    color: var(--text);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    padding: 24px;
+    backdrop-filter: blur(16px);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.theme-toggle {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.theme-toggle svg {
+    display: block;
+}
+
+[data-theme="light"] .theme-icon-sun {
+    display: inline-flex;
+}
+
+[data-theme="light"] .theme-icon-moon {
+    display: none;
+}
+
+[data-theme="dark"] .theme-icon-sun,
+:root:not([data-theme]) .theme-icon-sun {
+    display: none;
+}
+
+[data-theme="dark"] .theme-icon-moon,
+:root:not([data-theme]) .theme-icon-moon {
+    display: inline-flex;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.label-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.label-row label {
+    margin-bottom: 0;
+}
+
+textarea {
+    width: 100%;
+    min-height: 140px;
+    resize: vertical;
+    border: 1px solid var(--border);
+    background: color-mix(in srgb, var(--card) 70%, transparent);
+    color: var(--text);
+    border-radius: 14px;
+    padding: 14px 16px;
+    padding-inline-end: 52px;
+    font-size: 16px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.2);
+}
+
+.field {
+    position: relative;
+}
+
+.textarea-wrap {
+    position: relative;
+}
+
+.field-action {
+    position: absolute;
+    top: 12px;
+    inset-inline-end: 12px;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: linear-gradient(180deg, var(--button), var(--button-2));
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 18px rgba(30, 106, 214, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+    transition: transform 0.15s ease;
+}
+
+.field-action:hover { transform: translateY(-1px); }
+
+.field-action svg {
+    display: block;
+}
+
+.field-action.done {
+    background: linear-gradient(180deg, #22c55e, #16a34a);
+}
+
+.field-action.done::after {
+    content: "کپی شد";
+    position: absolute;
+    top: 50%;
+    inset-inline-end: 40px;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #22c55e;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(34, 197, 94, 0.35);
+    padding: 4px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.hint {
+    font-size: 12px;
+    color: var(--text);
+    background: var(--hint-bg);
+    border: 1px solid var(--hint-border);
+    padding: 4px 8px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: normal;
+}
+
+.hint.placeholder {
+    visibility: hidden;
+}
+
+.hint .hint-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--button) 30%, transparent);
+    border: 1px solid color-mix(in srgb, var(--button) 50%, transparent);
+    color: var(--text);
+    font-size: 11px;
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.chip {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 12px;
+    color: var(--muted);
+    font-size: 12px;
+    background: var(--chip-bg);
+}
+
+.footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+}

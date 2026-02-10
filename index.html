@@ -7,173 +7,7 @@
     <link rel="icon" href="fav.ico" type="image/x-icon" />
     <title>آموزشیار — ابزار تبدیل متن</title>
     <meta name="description" content="ابزار تبدیل متن سامانه آموزشیار برای استانداردسازی ورودی‌ها و تبدیل ارقام و حروف." />
-    <style>
-        @import url("https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-Variable-font-face.css");
-        :root {
-            color-scheme: dark;
-            --bg: #0b1220;
-            --card: rgba(17, 24, 39, 0.85);
-            --muted: #94a3b8;
-            --text: #e2e8f0;
-            --accent: #22d3ee;
-            --accent-2: #a78bfa;
-            --border: rgba(148, 163, 184, 0.2);
-            --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-        }
-
-        * { box-sizing: border-box; }
-
-        body {
-            margin: 0;
-            font-family: "Vazirmatn", system-ui, -apple-system, sans-serif;
-            background: radial-gradient(1200px 800px at 20% -10%, #1f2a44, transparent),
-                        radial-gradient(1000px 700px at 110% 10%, #312e81, transparent),
-                        var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 16px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 980px;
-            display: grid;
-            gap: 24px;
-        }
-
-        .hero {
-            text-align: center;
-        }
-
-        .hero-logo {
-            width: clamp(90px, 18vw, 150px);
-            height: auto;
-            object-fit: contain;
-            border-radius: 16px;
-            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
-            margin-bottom: 8px;
-        }
-
-        .hero p {
-            margin: 0;
-            color: var(--muted);
-            font-size: clamp(14px, 1.6vw, 18px);
-        }
-
-        .card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            padding: 24px;
-            backdrop-filter: blur(16px);
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 18px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        textarea {
-            width: 100%;
-            min-height: 140px;
-            resize: vertical;
-            border: 1px solid var(--border);
-            background: rgba(15, 23, 42, 0.65);
-            color: var(--text);
-            border-radius: 14px;
-            padding: 14px 16px;
-            padding-inline-end: 52px;
-            font-size: 16px;
-            font-family: inherit;
-            outline: none;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        textarea:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.2);
-        }
-
-        .field {
-            position: relative;
-        }
-
-        .field-action {
-            position: absolute;
-            top: 44px;
-            inset-inline-end: 12px;
-            width: 34px;
-            height: 34px;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            background: linear-gradient(180deg, #2f80ed, #1b5fbe);
-            color: #ffffff;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 18px rgba(30, 106, 214, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
-            transition: transform 0.15s ease;
-        }
-
-        .field-action:hover { transform: translateY(-1px); }
-
-        .field-action svg {
-            display: block;
-        }
-
-        .field-action.done {
-            background: linear-gradient(180deg, #22c55e, #16a34a);
-        }
-
-        .field-action.done::after {
-            content: "کپی شد";
-            position: absolute;
-            top: 50%;
-            inset-inline-end: 40px;
-            transform: translateY(-50%);
-            font-size: 12px;
-            color: #22c55e;
-            background: rgba(15, 23, 42, 0.9);
-            border: 1px solid rgba(34, 197, 94, 0.35);
-            padding: 4px 8px;
-            border-radius: 999px;
-            white-space: nowrap;
-        }
-
-        .chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .chip {
-            border: 1px solid var(--border);
-            border-radius: 999px;
-            padding: 6px 12px;
-            color: var(--muted);
-            font-size: 12px;
-            background: rgba(148, 163, 184, 0.08);
-        }
-
-        .footer {
-            text-align: center;
-            color: var(--muted);
-            font-size: 12px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
     <main class="container">
@@ -182,42 +16,80 @@
             <p>ابزار تبدیل متن سامانه آموزشیار</p>
         </section>
 
+        <div class="topbar">
+            <button id="themeToggle" class="field-action theme-toggle" type="button" title="تغییر تم" aria-label="تغییر تم">
+                <span class="theme-icon-moon" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+                    </svg>
+                </span>
+                <span class="theme-icon-sun" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2"></path>
+                        <path d="M12 20v2"></path>
+                        <path d="M4.93 4.93l1.41 1.41"></path>
+                        <path d="M17.66 17.66l1.41 1.41"></path>
+                        <path d="M2 12h2"></path>
+                        <path d="M20 12h2"></path>
+                        <path d="M4.93 19.07l1.41-1.41"></path>
+                        <path d="M17.66 6.34l1.41-1.41"></path>
+                    </svg>
+                </span>
+            </button>
+        </div>
+
         <section class="card">
             <div class="grid">
                 <div class="field">
-                    <label for="inputText">متن ورودی</label>
-                    <textarea id="inputText" placeholder="اینجا بنویسید…"></textarea>
-                    <button id="clearInputBtn" class="field-action" type="button" title="پاک کردن" aria-label="پاک کردن متن ورودی">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <polyline points="3 6 5 6 21 6"></polyline>
-                            <path d="M8 6V4h8v2"></path>
-                            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
-                            <line x1="10" y1="11" x2="10" y2="17"></line>
-                            <line x1="14" y1="11" x2="14" y2="17"></line>
-                        </svg>
-                    </button>
+                    <div class="label-row">
+                        <label for="inputText">متن ورودی:</label>
+                        <div class="hint placeholder">نکته: برای کپی روی <span class="hint-chip"></span> کلیک کنید</div>
+                    </div>
+                    <div class="textarea-wrap">
+                        <textarea id="inputText" placeholder="اینجا بنویسید…"></textarea>
+                        <button id="clearInputBtn" class="field-action" type="button" title="پاک کردن" aria-label="پاک کردن متن ورودی">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M8 6V4h8v2"></path>
+                                <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+                                <line x1="10" y1="11" x2="10" y2="17"></line>
+                                <line x1="14" y1="11" x2="14" y2="17"></line>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
                 <div class="field">
-                    <label for="outputText">خروجی تبدیل‌شده</label>
-                    <textarea id="outputText" readonly></textarea>
-                    <button id="copyOutputBtn" class="field-action" type="button" title="کپی خروجی" aria-label="کپی خروجی">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <div class="label-row">
+                        <label for="outputText">خروجی تبدیل‌ شده:</label>
+                        <div class="hint">نکته: برای کپی روی <span class="hint-chip">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                         </svg>
-                    </button>
+                        </span> کلیک کنید</div>
+                    </div>
+                    <div class="textarea-wrap">
+                        <textarea id="outputText" readonly></textarea>
+                        <button id="copyOutputBtn" class="field-action" type="button" title="کپی خروجی" aria-label="کپی خروجی">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <div class="chips" style="margin-top: 18px;">
-                <span class="chip">پشتیبانی از ارقام فارسی و عربی</span>
+                <span class="chip">پشتیبانی از ارقام فارسی و انگلیسی</span>
                 <span class="chip">الگوی تبدیل حروف با %</span>
                 <span class="chip">سریع و سبک برای آموزشیار</span>
                 <span class="chip" id="visitChip">بازدید کل: —</span>
             </div>
         </section>
 
-        <div class="footer">© 1404 — همه حقوق محفوظ است</div>
+        <div class="footer">© 2026 — همه حقوق محفوظ است</div>
     </main>
 
     <script>
@@ -247,6 +119,7 @@
         const outputText = document.getElementById("outputText");
         const clearInputBtn = document.getElementById("clearInputBtn");
         const copyOutputBtn = document.getElementById("copyOutputBtn");
+        const themeToggle = document.getElementById("themeToggle");
 
         function runConversion() {
             const value = inputText.value || "";
@@ -276,6 +149,26 @@
                 outputText.select();
                 document.execCommand("copy");
             }
+        });
+
+        const storedTheme = localStorage.getItem("theme");
+        function applyTheme(value) {
+            const next = value || "dark";
+            document.documentElement.setAttribute("data-theme", next);
+            themeToggle.setAttribute("aria-label", next === "light" ? "تم روشن" : "تم تیره");
+        }
+
+        if (storedTheme) {
+            applyTheme(storedTheme);
+        } else {
+            applyTheme("dark");
+        }
+
+        themeToggle.addEventListener("click", () => {
+            const current = document.documentElement.getAttribute("data-theme");
+            const next = current === "light" ? "dark" : "light";
+            applyTheme(next);
+            localStorage.setItem("theme", next);
         });
 
         const visitChip = document.getElementById("visitChip");
